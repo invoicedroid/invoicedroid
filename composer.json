@@ -12,7 +12,11 @@
         "ext-json": "*",
         "barryvdh/laravel-cors": "^0.11.4",
         "fideloper/proxy": "^4.0",
+        "invoicedroid/language": "^1.0",
         "invoicedroid/money": "^1.0",
+        "invoicedroid/version": "^1.0",
+        "jenssegers/date": "^3.5",
+        "kg-bot/laravel-localization-to-vue": "^1.6",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0"
     },
@@ -52,6 +56,14 @@
         {
             "type": "path",
             "url": "packages/invoicedroid/money"
+        },
+        {
+            "type": "path",
+            "url": "packages/invoicedroid/version"
+        },
+        {
+            "type": "path",
+            "url": "packages/invoicedroid/language"
         }
     ],
     "minimum-stability": "dev",

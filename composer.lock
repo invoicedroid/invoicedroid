@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bbeec337993c158bef29a4f9491680e4",
+    "content-hash": "74cfd0f9b4c3bdf063dd483ca4dc6d41",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -495,6 +495,57 @@
             "time": "2019-07-29T16:49:45+00:00"
         },
         {
+            "name": "invoicedroid/language",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "packages/invoicedroid/language",
+                "reference": "06ebad466c7f87a5e4430e0f0bf506bc3523e3b4"
+            },
+            "require": {
+                "illuminate/support": ">=5.8 <6.0",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "InvoiceDroid\\Language\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "Language": "InvoiceDroid\\Language\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "InvoiceDroid\\Language\\": "./src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Goran Krgovic",
+                    "email": "info@invoicedroid.com",
+                    "homepage": "https://www.invoicedroid.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Multi-lang package",
+            "keywords": [
+                "laravel"
+            ]
+        },
+        {
             "name": "invoicedroid/money",
             "version": "1.0.0",
             "dist": {
@@ -543,6 +594,59 @@
                 "currency",
                 "laravel",
                 "money"
+            ]
+        },
+        {
+            "name": "invoicedroid/version",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "packages/invoicedroid/version",
+                "reference": "378f50e66e0a115f615a89345393eea03c524ebc"
+            },
+            "require": {
+                "illuminate/support": ">=5.8 <6.0",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "InvoiceDroid\\Version\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "Version": "InvoiceDroid\\Version\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "InvoiceDroid\\Version\\": "./src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Goran Krgovic",
+                    "email": "info@invoicedroid.com",
+                    "homepage": "https://www.invoicedroid.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "SemVer versioning",
+            "keywords": [
+                "laravel",
+                "semver",
+                "version"
             ]
         },
         {
@@ -632,6 +736,124 @@
             ],
             "description": "Highlight PHP code in terminal",
             "time": "2018-09-29T18:48:56+00:00"
+        },
+        {
+            "name": "jenssegers/date",
+            "version": "v3.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jenssegers/date.git",
+                "reference": "58393b0544fc2525b3fcd02aa4c989857107e05a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jenssegers/date/zipball/58393b0544fc2525b3fcd02aa4c989857107e05a",
+                "reference": "58393b0544fc2525b3fcd02aa4c989857107e05a",
+                "shasum": ""
+            },
+            "require": {
+                "nesbot/carbon": "^1.0|^2.0",
+                "php": ">=5.6",
+                "symfony/translation": "^2.7|^3.0|^4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.0|^6.0|^7.0",
+                "satooshi/php-coveralls": "^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Jenssegers\\Date\\DateServiceProvider"
+                    ],
+                    "aliases": {
+                        "Date": "Jenssegers\\Date\\Date"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jenssegers\\Date\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jens Segers",
+                    "homepage": "https://jenssegers.com"
+                }
+            ],
+            "description": "A date library to help you work with dates in different languages",
+            "homepage": "https://github.com/jenssegers/date",
+            "keywords": [
+                "carbon",
+                "date",
+                "datetime",
+                "i18n",
+                "laravel",
+                "time",
+                "translation"
+            ],
+            "time": "2019-03-10T08:50:58+00:00"
+        },
+        {
+            "name": "kg-bot/laravel-localization-to-vue",
+            "version": "v1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kg-bot/laravel-localization-to-vue.git",
+                "reference": "73994b7e613980dad249a92e2f540810f9a620a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kg-bot/laravel-localization-to-vue/zipball/73994b7e613980dad249a92e2f540810f9a620a9",
+                "reference": "73994b7e613980dad249a92e2f540810f9a620a9",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "KgBot\\LaravelLocalization\\LaravelLocalizationServiceProvider"
+                    ],
+                    "aliases": {
+                        "ExportLocalization": "KgBot\\LaravelLocalization\\Facades\\ExportLocalizations"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "KgBot\\LaravelLocalization\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stefan Ninic",
+                    "email": "ninicstefan94@gmail.com"
+                }
+            ],
+            "description": "Laravel package used to collect all localization files from resources/lang directory and sub-directories and make them available as JSON file",
+            "keywords": [
+                "Vue.js",
+                "json",
+                "laravel",
+                "localization",
+                "trans"
+            ],
+            "time": "2019-02-14T16:26:37+00:00"
         },
         {
             "name": "laravel/framework",

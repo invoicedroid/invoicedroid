@@ -31,6 +31,7 @@ class ServiceProvider extends BaseServiceProvider
             });
         });
     }
+
     /**
      * Register the application services.
      *

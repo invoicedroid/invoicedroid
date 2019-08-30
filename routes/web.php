@@ -11,10 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['language', 'installed']], function() {
+    Route::get('{path}', function () {
+        return view('index');
+    })->where('path', '(.*)');
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

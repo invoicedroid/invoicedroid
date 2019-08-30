@@ -15,6 +15,18 @@ return [
 
     'name' => env('APP_NAME', 'InvoiceDroid'),
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | If the application is installed
+    |--------------------------------------------------------------------------
+    |
+    | This value is used when the
+    | framework needs to install the prerequisites
+    |
+    */
+    'installed' => env('APP_INSTALLED', false),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -80,7 +92,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' =>  env('APP_LOCALE', 'en-US'),
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +105,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'en-US',
 
     /*
     |--------------------------------------------------------------------------

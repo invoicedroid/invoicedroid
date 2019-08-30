@@ -1,0 +1,44 @@
+{
+    "name":"invoicedroid/language",
+    "description":"Multi-lang package",
+    "version": "1.0.0",
+    "minimum-stability": "dev",
+    "keywords":[
+        "laravel"
+    ],
+    "license":"MIT",
+    "authors":[
+        {
+            "name":"Goran Krgovic",
+            "email":"info@invoicedroid.com",
+            "homepage":"https://www.invoicedroid.org",
+            "role":"Developer"
+        }
+    ],
+    "require":{
+        "php":">=5.5.9",
+        "illuminate/support":">=5.8 <6.0"
+    },
+    "require-dev":{
+        "mockery/mockery":"~0.9",
+        "phpunit/phpunit":"~4.0"
+    },
+    "autoload":{
+        "psr-4":{
+            "InvoiceDroid\\Language\\":"./src"
+        },
+        "files":[
+            "src/helpers.php"
+        ]
+    },
+    "extra":{
+        "laravel":{
+            "providers":[
+                "InvoiceDroid\\Language\\ServiceProvider"
+            ],
+            "aliases": {
+                "Language": "InvoiceDroid\\Language\\Facade"
+            }
+        }
+    }
+}
