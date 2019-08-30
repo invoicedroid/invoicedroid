@@ -1,0 +1,73 @@
+// Name:            Padding
+// Description:     Utilities for padding
+//
+// Component:       `id-padding`
+//                  `id-padding-large`
+//                  `id-padding-remove-*`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$padding-padding:                                        $global-gutter !default;
+$padding-padding-l:                                      $global-medium-gutter !default;
+
+$padding-small-padding:                                  $global-small-gutter !default;
+
+$padding-large-padding:                                  $global-gutter !default;
+$padding-large-padding-l:                                $global-large-gutter !default;
+
+
+/* ========================================================================
+   Component: Padding
+ ========================================================================== */
+
+.id-padding { padding: $padding-padding; }
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    .id-padding { padding: $padding-padding-l; }
+
+}
+
+
+/* Small
+ ========================================================================== */
+
+.id-padding-small { padding: $padding-small-padding; }
+
+
+/* Large
+ ========================================================================== */
+
+.id-padding-large { padding: $padding-large-padding; }
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    .id-padding-large { padding: $padding-large-padding-l; }
+
+}
+
+
+/* Remove
+ ========================================================================== */
+
+.id-padding-remove { padding: 0 !important; }
+.id-padding-remove-top { padding-top: 0 !important; }
+.id-padding-remove-bottom { padding-bottom: 0 !important; }
+.id-padding-remove-left { padding-left: 0 !important; }
+.id-padding-remove-right { padding-right: 0 !important; }
+
+.id-padding-remove-vertical {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.id-padding-remove-horizontal {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}

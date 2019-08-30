@@ -1,0 +1,200 @@
+// Name:            Flex
+// Description:     Utilities for layouts based on flexbox
+//
+// Component:       `id-flex-*`
+//
+// ========================================================================
+
+/* ========================================================================
+   Component: Flex
+ ========================================================================== */
+
+.id-flex { display: flex; }
+.id-flex-inline { display: inline-flex; }
+
+/*
+ * Remove pseudo elements created by micro clearfix as precaution
+ */
+
+.id-flex::before,
+.id-flex::after,
+.id-flex-inline::before,
+.id-flex-inline::after { display: none; }
+
+
+/* Alignment
+ ========================================================================== */
+
+/*
+ * Align items along the main axis of the current line of the flex container
+ * Row: Horizontal
+ */
+
+// Default
+.id-flex-left { justify-content: flex-start; }
+.id-flex-center { justify-content: center; }
+.id-flex-right { justify-content: flex-end; }
+.id-flex-between { justify-content: space-between; }
+.id-flex-around { justify-content: space-around; }
+
+
+/* Phone landscape and bigger */
+@media (min-width: $breakpoint-small) {
+
+    .id-flex-left\@s { justify-content: flex-start; }
+    .id-flex-center\@s { justify-content: center; }
+    .id-flex-right\@s { justify-content: flex-end; }
+    .id-flex-between\@s { justify-content: space-between; }
+    .id-flex-around\@s { justify-content: space-around; }
+
+}
+
+/* Tablet landscape and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    .id-flex-left\@m { justify-content: flex-start; }
+    .id-flex-center\@m { justify-content: center; }
+    .id-flex-right\@m { justify-content: flex-end; }
+    .id-flex-between\@m { justify-content: space-between; }
+    .id-flex-around\@m { justify-content: space-around; }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    .id-flex-left\@l { justify-content: flex-start; }
+    .id-flex-center\@l { justify-content: center; }
+    .id-flex-right\@l { justify-content: flex-end; }
+    .id-flex-between\@l { justify-content: space-between; }
+    .id-flex-around\@l { justify-content: space-around; }
+
+}
+
+/* Large screen and bigger */
+@media (min-width: $breakpoint-xlarge) {
+
+    .id-flex-left\@xl { justify-content: flex-start; }
+    .id-flex-center\@xl { justify-content: center; }
+    .id-flex-right\@xl { justify-content: flex-end; }
+    .id-flex-between\@xl { justify-content: space-between; }
+    .id-flex-around\@xl { justify-content: space-around; }
+
+}
+
+/*
+ * Align items in the cross axis of the current line of the flex container
+ * Row: Vertical
+ */
+
+// Default
+.id-flex-stretch { align-items: stretch; }
+.id-flex-top { align-items: flex-start; }
+.id-flex-middle { align-items: center; }
+.id-flex-bottom { align-items: flex-end; }
+
+
+/* Direction
+ ========================================================================== */
+
+// Default
+.id-flex-row { flex-direction: row; }
+.id-flex-row-reverse { flex-direction: row-reverse; }
+.id-flex-column { flex-direction: column; }
+.id-flex-column-reverse { flex-direction: column-reverse; }
+
+
+/* Wrap
+ ========================================================================== */
+
+// Default
+.id-flex-nowrap { flex-wrap: nowrap; }
+.id-flex-wrap { flex-wrap: wrap; }
+.id-flex-wrap-reverse { flex-wrap: wrap-reverse; }
+
+/*
+ * Aligns items within the flex container when there is extra space in the cross-axis
+ * Only works if there is more than one line of flex items
+ */
+
+// Default
+.id-flex-wrap-stretch { align-content: stretch; }
+.id-flex-wrap-top { align-content: flex-start; }
+.id-flex-wrap-middle { align-content: center; }
+.id-flex-wrap-bottom { align-content: flex-end; }
+.id-flex-wrap-between { align-content: space-between; }
+.id-flex-wrap-around { align-content: space-around; }
+
+
+/* Item ordering
+ ========================================================================== */
+
+/*
+ * Default is 0
+ */
+
+.id-flex-first { order: -1;}
+.id-flex-last { order: 99;}
+
+
+/* Phone landscape and bigger */
+@media (min-width: $breakpoint-small) {
+
+    .id-flex-first\@s { order: -1; }
+    .id-flex-last\@s { order: 99; }
+
+}
+
+/* Tablet landscape and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    .id-flex-first\@m { order: -1; }
+    .id-flex-last\@m { order: 99; }
+
+}
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    .id-flex-first\@l { order: -1; }
+    .id-flex-last\@l { order: 99; }
+
+}
+
+/* Large screen and bigger */
+@media (min-width: $breakpoint-xlarge) {
+
+    .id-flex-first\@xl { order: -1; }
+    .id-flex-last\@xl { order: 99; }
+
+}
+
+
+/* Item dimensions
+ ========================================================================== */
+
+/*
+ * Initial: 0 1 auto
+ * Content dimensions, but shrinks
+ */
+
+/*
+ * No Flex: 0 0 auto
+ * Content dimensions
+ */
+
+.id-flex-none { flex: none; }
+
+/*
+ * Relative Flex: 1 1 auto
+ * Space is allocated considering content
+ */
+
+.id-flex-auto { flex: auto; }
+
+/*
+ * Absolute Flex: 1 1 0%
+ * Space is allocated solely based on flex
+ */
+
+.id-flex-1 { flex: 1; }

@@ -1,0 +1,123 @@
+// Name:            Dotnav
+// Description:     Component to create dot navigations
+//
+// Component:       `id-dotnav`
+//
+// Modifier:        `id-dotnav-vertical`
+//
+// States:          `id-active`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$dotnav-margin-horizontal:                       12px !default;
+$dotnav-margin-vertical:                         $dotnav-margin-horizontal !default;
+
+$dotnav-item-width:                              10px !default;
+$dotnav-item-height:                             $dotnav-item-width !default;
+$dotnav-item-border-radius:                      50% !default;
+
+$dotnav-item-background:                         rgba($global-color, 0.2) !default;
+$dotnav-item-hover-background:                   rgba($global-color, 0.6) !default;
+$dotnav-item-onclick-background:                 rgba($global-color, 0.2) !default;
+$dotnav-item-active-background:                  rgba($global-color, 0.6) !default;
+
+
+/* ========================================================================
+   Component: Dotnav
+ ========================================================================== */
+
+/*
+ * 1. Allow items to wrap into the next line
+ * 2. Reset list
+ * 3. Gutter
+ */
+
+.id-dotnav {
+    display: flex;
+    /* 1 */
+    flex-wrap: wrap;
+    /* 2 */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    /* 3 */
+    margin-left: (-$dotnav-margin-horizontal);
+}
+
+/*
+ * 1. Space is allocated solely based on content dimensions: 0 0 auto
+ * 2. Gutter
+ */
+
+.id-dotnav > * {
+    /* 1 */
+    flex: none;
+    /* 2 */
+    padding-left: $dotnav-margin-horizontal;
+}
+
+
+/* Items
+ ========================================================================== */
+
+/*
+ * Items
+ * 1. Hide text if present
+ */
+
+.id-dotnav > * > * {
+    display: block;
+    box-sizing: border-box;
+    width: $dotnav-item-width;
+    height: $dotnav-item-height;
+    border-radius: $dotnav-item-border-radius;
+    background: $dotnav-item-background;
+    /* 1 */
+    text-indent: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Hover + Focus */
+.id-dotnav > * > :hover,
+.id-dotnav > * > :focus {
+    background-color: $dotnav-item-hover-background;
+    outline: none;
+}
+
+/* OnClick */
+.id-dotnav > * > :active {
+    background-color: $dotnav-item-onclick-background;
+}
+
+/* Active */
+.id-dotnav > .id-active > * {
+    background-color: $dotnav-item-active-background;
+}
+
+
+/* Modifier: 'id-dotnav-vertical'
+ ========================================================================== */
+
+/*
+ * 1. Change direction
+ * 2. Gutter
+ */
+
+.id-dotnav-vertical {
+    /* 1 */
+    flex-direction: column;
+    /* 2 */
+    margin-left: 0;
+    margin-top: (-$dotnav-margin-vertical);
+}
+
+/* 2 */
+.id-dotnav-vertical > * {
+    padding-left: 0;
+    padding-top: $dotnav-margin-vertical;
+}

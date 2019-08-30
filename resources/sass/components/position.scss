@@ -1,0 +1,249 @@
+// Name:            Position
+// Description:     Utilities to position content
+//
+// Component:       `id-position-absolute`
+//                  `id-position-relative`
+//                  `id-position-z-index`
+//                  `id-position-top`
+//                  `id-position-bottom`
+//                  `id-position-left`
+//                  `id-position-right`
+//                  `id-position-top-left`
+//                  `id-position-top-center`
+//                  `id-position-top-right`
+//                  `id-position-bottom-left`
+//                  `id-position-bottom-center`
+//                  `id-position-bottom-right`
+//                  `id-position-center`
+//                  `id-position-center-left`
+//                  `id-position-center-right`
+//                  `id-position-cover`
+//
+// Modifiers:       `id-position-small`
+//                  `id-position-medium`
+//                  `id-position-large`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$position-small-margin:                                 $global-small-gutter !default;
+$position-medium-margin:                                $global-gutter !default;
+$position-large-margin:                                 $global-gutter !default;
+$position-large-margin-l:                               50px !default;
+
+
+/* ========================================================================
+   Component: Position
+ ========================================================================== */
+
+
+/* Directions
+ ========================================================================== */
+
+[class*='id-position-top'],
+[class*='id-position-bottom'],
+[class*='id-position-left'],
+[class*='id-position-right'],
+[class*='id-position-center'] { position: absolute !important; }
+
+
+/* Edges
+ ========================================================================== */
+
+/* Don't use `width: 100%` because it is wrong if the parent has padding. */
+.id-position-top {
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.id-position-bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.id-position-left {
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.id-position-right {
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+
+/* Corners
+ ========================================================================== */
+
+.id-position-top-left {
+    top: 0;
+    left: 0;
+}
+
+.id-position-top-right {
+    top: 0;
+    right: 0;
+}
+
+.id-position-bottom-left {
+    bottom: 0;
+    left: 0;
+}
+
+.id-position-bottom-right {
+    bottom: 0;
+    right: 0;
+}
+
+/*
+ * Center
+ * 1. Fix text wrapping if content is larger than 50% of the container.
+ */
+
+.id-position-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    /* 1 */
+    width: max-content;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Vertical */
+[class*='id-position-center-left'],
+[class*='id-position-center-right'] {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.id-position-center-left { left: 0; }
+.id-position-center-right { right: 0; }
+
+.id-position-center-left-out {
+    right: 100%;
+    width: max-content;
+}
+
+.id-position-center-right-out {
+    left: 100%;
+    width: max-content;
+}
+
+/* Horizontal */
+.id-position-top-center,
+.id-position-bottom-center {
+    left: 50%;
+    transform: translateX(-50%);
+    /* 1 */
+    width: max-content;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.id-position-top-center { top: 0; }
+.id-position-bottom-center { bottom: 0; }
+
+
+/* Cover
+ ========================================================================== */
+
+.id-position-cover {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+
+/* Utility
+ ========================================================================== */
+
+.id-position-relative { position: relative !important; }
+
+.id-position-absolute { position: absolute !important; }
+
+.id-position-fixed { position: fixed !important; }
+
+.id-position-z-index { z-index: 1; }
+
+
+/* Margin modifier
+ ========================================================================== */
+
+/*
+ * Small
+ */
+
+.id-position-small {
+    max-width: unquote('calc(100% - (#{$position-small-margin} * 2))');
+    margin: $position-small-margin;
+}
+
+.id-position-small.id-position-center { transform: translate(-50%, -50%) translate(-$position-small-margin, (-$position-small-margin)); }
+
+.id-position-small[class*='id-position-center-left'],
+.id-position-small[class*='id-position-center-right'] { transform: translateY(-50%) translateY(-$position-small-margin); }
+
+.id-position-small.id-position-top-center,
+.id-position-small.id-position-bottom-center { transform: translateX(-50%) translateX(-$position-small-margin); }
+
+/*
+ * Medium
+ */
+
+.id-position-medium {
+    max-width: unquote('calc(100% - (#{$position-medium-margin} * 2))');
+    margin: $position-medium-margin;
+}
+
+.id-position-medium.id-position-center { transform: translate(-50%, -50%) translate(-$position-medium-margin, (-$position-medium-margin)); }
+
+.id-position-medium[class*='id-position-center-left'],
+.id-position-medium[class*='id-position-center-right'] { transform: translateY(-50%) translateY(-$position-medium-margin); }
+
+.id-position-medium.id-position-top-center,
+.id-position-medium.id-position-bottom-center { transform: translateX(-50%) translateX(-$position-medium-margin); }
+
+/*
+ * Large
+ */
+
+.id-position-large {
+    max-width: unquote('calc(100% - (#{$position-large-margin} * 2))');
+    margin: $position-large-margin;
+}
+
+.id-position-large.id-position-center { transform: translate(-50%, -50%) translate(-$position-large-margin, (-$position-large-margin)); }
+
+.id-position-large[class*='id-position-center-left'],
+.id-position-large[class*='id-position-center-right'] { transform: translateY(-50%) translateY(-$position-large-margin); }
+
+.id-position-large.id-position-top-center,
+.id-position-large.id-position-bottom-center { transform: translateX(-50%) translateX(-$position-large-margin); }
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    .id-position-large {
+        max-width: unquote('calc(100% - (#{$position-large-margin-l} * 2))');
+        margin: $position-large-margin-l;
+    }
+
+    .id-position-large.id-position-center { transform: translate(-50%, -50%) translate(-$position-large-margin-l, (-$position-large-margin-l)); }
+
+    .id-position-large[class*='id-position-center-left'],
+    .id-position-large[class*='id-position-center-right'] { transform: translateY(-50%) translateY(-$position-large-margin-l); }
+
+    .id-position-large.id-position-top-center,
+    .id-position-large.id-position-bottom-center { transform: translateX(-50%) translateX(-$position-large-margin-l); }
+
+}
