@@ -71,6 +71,17 @@ class SetLocale
     }
 
     /**
+     * @param  \Illuminate\Http\Request $request
+     * @return string|null
+     */
+    protected function parseLocale($request)
+    {
+        $locale = $request->server('HTTP_ACCEPT_LANGUAGE');
+        $locale = substr($locale, 0, strpos($locale, ',') ?: strlen($locale));
+        $this->setLocale($locale);
+    }
+
+    /**
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
@@ -87,6 +98,9 @@ class SetLocale
         } else {
             $this->setSystemLocale($request);
         }
+        // set from the HTTP_ACCEPT_LANGUAGE
+        $this->parseLocale($request);
+
         return $next($request);
     }
 }

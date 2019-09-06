@@ -11,6 +11,6 @@
 |
 */
 
-Route::group(['middleware' => ['language', 'auth']], function() {
+Route::group(['middleware' => ['language']], function() {
     Route::get('{path}', 'FrontendController@show')->where('path', '(.*)')->name('admin.dashboard');
 });

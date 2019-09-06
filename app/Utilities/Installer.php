@@ -223,6 +223,9 @@ class Installer
         // Create Roles
         Artisan::call('db:seed', ['--class' => 'RolesPermissionsTableSeeder', '--force' => true]);
 
+        // Generate the JWT keys
+        Artisan::call('jwt:secret');
+
         return true;
     }
 
