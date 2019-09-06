@@ -39,6 +39,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapInstallRoutes();
 
+        $this->mapAuthRoutes();
+
         $this->mapWebRoutes();
 
         //
@@ -69,6 +71,18 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/install.php'));
+    }
+
+    /**
+     * Define the "auth" routes for application
+     *
+     * @return void
+     */
+    protected function mapAuthRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/auth.php'));
     }
 
     /**

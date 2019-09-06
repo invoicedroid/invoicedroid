@@ -14,11 +14,13 @@
         "fideloper/proxy": "^4.0",
         "invoicedroid/language": "^1.0",
         "invoicedroid/money": "^1.0",
+        "invoicedroid/setting": "^1.0",
         "invoicedroid/version": "^1.0",
         "jenssegers/date": "^3.5",
         "kg-bot/laravel-localization-to-vue": "^1.6",
         "laravel/framework": "5.8.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "santigarcor/laratrust": "^5.2"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
@@ -64,6 +66,10 @@
         {
             "type": "path",
             "url": "packages/invoicedroid/language"
+        },
+        {
+            "type": "path",
+            "url": "packages/invoicedroid/setting"
         }
     ],
     "minimum-stability": "dev",

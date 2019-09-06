@@ -1,7 +1,14 @@
 <?php
 namespace App\Utilities;
 
+use App\Models\Auth\User;
+use App\Models\Company\Company;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class Installer
 {
@@ -121,11 +128,15 @@ class Installer
     }
 
 
+    /**
+     * Creates an env file
+     * @throws \Exception
+     */
     public static function createEnvFile()
     {
         // Rename file
         if (is_file(base_path('.env.example'))) {
-            File::move(base_path('.env.example'), base_path('.env'));
+            File::copy(base_path('.env.example'), base_path('.env'));
         }
         // Update .env file
         static::updateEnvFile([
@@ -133,6 +144,9 @@ class Installer
         ]);
     }
 
+    /**
+     * Final touches to the env file
+     */
     public static function finalTouches()
     {
         // Update .env file
@@ -141,17 +155,21 @@ class Installer
             'APP_INSTALLED' =>  'true',
             'APP_DEBUG'     =>  'false',
         ]);
-        // Rename the robots.txt file
-        try {
-            File::move(base_path('robots.txt.dist'), base_path('robots.txt'));
-        } catch (\Exception $e) {
-            // nothing to do
-        }
     }
 
+    /**
+     * @param $data
+     * @return bool
+     * @throws \Exception
+     */
     public static function updateEnvFile($data)
     {
-        if (empty($data) || !is_array($data) || !is_file(base_path('.env'))) {
+        if( !is_file(base_path('.env')) ) {
+            // create the env file
+            static::createEnvFile();
+        }
+
+        if (empty($data) || !is_array($data) ) {
             return false;
         }
 
@@ -178,4 +196,158 @@ class Installer
         file_put_contents(base_path('.env'), $env);
         return true;
     }
+
+
+    /**
+     * @param $host
+     * @param $port
+     * @param $database
+     * @param $username
+     * @param $password
+     * @return bool
+     */
+    public static function createDbTables($host, $port, $database, $username, $password)
+    {
+        if (!static::isDbValid($host, $port, $database, $username, $password)) {
+            return false;
+        }
+
+        // Set database details
+        static::saveDbVariables($host, $port, $database, $username, $password);
+
+        // Try to increase the maximum execution time
+        set_time_limit(300); // 5 minutes
+        // Create tables
+        Artisan::call('migrate', ['--force' => true]);
+
+        // Create Roles
+        Artisan::call('db:seed', ['--class' => 'RolesPermissionsTableSeeder', '--force' => true]);
+
+        return true;
+    }
+
+
+    /**
+     * Check if the database exists and is accessible.
+     *
+     * @param $host
+     * @param $port
+     * @param $database
+     * @param $host
+     * @param $database
+     * @param $username
+     * @param $password
+     *
+     * @return bool
+     */
+    public static function isDbValid($host, $port, $database, $username, $password)
+    {
+        Config::set('database.connections.install_test', [
+            'host'      => $host,
+            'port'      => $port,
+            'database'  => $database,
+            'username'  => $username,
+            'password'  => $password,
+            'driver'    => env('DB_CONNECTION', 'mysql'),
+            'charset'   => env('DB_CHARSET', 'utf8mb4'),
+        ]);
+        try {
+            DB::connection('install_test')->getPdo();
+        } catch (\Exception $e) {
+            return false;
+        }
+        // Purge test connection
+        DB::purge('install_test');
+        return true;
+    }
+
+
+    /**
+     * @param $host
+     * @param $port
+     * @param $database
+     * @param $username
+     * @param $password
+     * @throws \Exception
+     */
+    public static function saveDbVariables($host, $port, $database, $username, $password)
+    {
+        $prefix = strtolower(Str::random(3) . '_');
+        // Update .env file
+        static::updateEnvFile([
+            'DB_HOST'       =>  $host,
+            'DB_PORT'       =>  $port,
+            'DB_DATABASE'   =>  $database,
+            'DB_USERNAME'   =>  $username,
+            'DB_PASSWORD'   =>  $password,
+            'DB_PREFIX'     =>  $prefix,
+        ]);
+        $con = env('DB_CONNECTION', 'mysql');
+        // Change current connection
+        $db = Config::get('database.connections.' . $con);
+        $db['host'] = $host;
+        $db['database'] = $database;
+        $db['username'] = $username;
+        $db['password'] = $password;
+        $db['prefix'] = $prefix;
+        Config::set('database.connections.' . $con, $db);
+        DB::purge($con);
+        DB::reconnect($con);
+    }
+
+
+    /**
+     * @param $name
+     * @param $email
+     * @param $locale
+     * @return Company
+     */
+    public static function createCompany($name, $email, $locale)
+    {
+        // Create company
+        $company = Company::create([
+            'domain' => '',
+        ]);
+        // Set settings
+        setting()->setExtraColumns(['company_id' => $company->id]);
+        setting()->set([
+            'general.company_name'          => $name,
+            'general.company_email'         => $email,
+            'general.default_currency'      => 'USD',
+            'general.default_locale'        => $locale,
+        ]);
+        setting()->save();
+
+        return $company;
+    }
+
+
+    /**
+     * @param $email
+     * @param $password
+     * @param $name
+     * @param $locale
+     * @param $company
+     * @return User
+     */
+    public static function createUser($email, $password, $name, $locale, $company)
+    {
+        // Create the user
+        $user = User::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => Hash::make($password),
+            'locale' => $locale,
+        ]);
+
+        // Attach admin role
+        $user->roles()->attach(1);
+
+        // Attach company
+        $user->companies()->attach($company->id);
+        return $user;
+    }
+
+
+
 }

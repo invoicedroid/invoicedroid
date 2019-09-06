@@ -32,5 +32,12 @@ class AppServiceProvider extends ServiceProvider
                 'messages' => ExportLocalization::export()->toArray(),
             ] );
         } );
+
+        View::composer( 'layouts.install', function ( $view ) {
+
+            return $view->with( [
+                'messages' => ExportLocalization::export()->toArray(),
+            ] );
+        } );
     }
 }

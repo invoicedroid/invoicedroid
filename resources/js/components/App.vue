@@ -9,6 +9,7 @@
 
 <script>
     import Loading from './Loading'
+
     // Load layout components dynamically.
     const requireContext = require.context('../layouts', false, /.*\.vue$/)
 

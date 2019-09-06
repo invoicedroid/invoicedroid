@@ -19,7 +19,7 @@ return [
     | to url('/')
     |
     */
-    'home'          => true,
+    'home'          => false,
     /*
     |--------------------------------------------------------------------------
     | Add Language Code
@@ -46,7 +46,7 @@ return [
     | This option the language of jenssegers/date library.
     |
     */
-    'date'          => false,
+    'date'          => true,
     /*
     |--------------------------------------------------------------------------
     | Auto Change Language
@@ -96,7 +96,7 @@ return [
     | Long: languagecode-COUNTRYCODE (en-GB)
     |
     */
-    'mode'          => ['code' => 'short', 'name' => 'native'],
+    'mode'          => ['code' => 'long', 'name' => 'english'],
     /*
     |--------------------------------------------------------------------------
     | Allowed languages
@@ -105,7 +105,7 @@ return [
     | This options indicates the language allowed languages.
     |
     */
-    'allowed'       => ['en-US', 'es-ES'],
+    'allowed'       => ['en-US', 'sr-CS', 'sr-RS', 'nb-NO', 'ko-KR'],
 
     /*
     |--------------------------------------------------------------------------
@@ -143,8 +143,8 @@ return [
         ['short' => 'pt',       'long' => 'pt-PT',      'english' => 'Portuguese',          'native' => 'Português'],
         ['short' => 'ro',       'long' => 'ro-RO',      'english' => 'Romanian',            'native' => 'Română'],
         ['short' => 'ru',       'long' => 'ru-RU',      'english' => 'Russian',             'native' => 'Русский'],
-        ['short' => 'sr',       'long' => 'sr-RS',      'english' => 'Serbian (Cyrillic)',  'native' => 'Српски језик'],
-        ['short' => 'sr',       'long' => 'sr-CS',      'english' => 'Serbian (Latin)',     'native' => 'Српски језик'],
+        ['short' => 'sr',       'long' => 'sr-RS',      'english' => 'Serbian (Cyrillic)',  'native' => 'Српски'],
+        ['short' => 'sr',       'long' => 'sr-CS',      'english' => 'Serbian (Latin)',     'native' => 'Srpski'],
         ['short' => 'sq',       'long' => 'sq-AL',      'english' => 'Albanian',            'native' => 'Shqip'],
         ['short' => 'sk',       'long' => 'sk-SK',      'english' => 'Slovak',              'native' => 'Slovenčina'],
         ['short' => 'sl',       'long' => 'sl-SL',      'english' => 'Slovenian',           'native' => 'Slovenščina'],

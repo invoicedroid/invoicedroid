@@ -1,0 +1,340 @@
+// Name:            Grid
+// Description:     Component to create responsive, fluid and nestable grids
+//
+// Component:       `id-grid`
+//
+// Modifiers:       `id-grid-small`
+//                  `id-grid-medium`
+//                  `id-grid-large`
+//                  `id-grid-collapse`
+//                  `id-grid-divider`
+//                  `id-grid-match`
+//                  `id-grid-stack`
+//                  `id-grid-margin`
+//                  `id-grid-margin-small`
+//                  `id-grid-margin-medium`
+//                  `id-grid-margin-large`
+//                  `id-grid-margin-collapse`
+//
+// Sub-modifier:    `id-grid-item-match`
+//
+// States:          `id-first-column`
+//
+// ========================================================================
+
+// Variables
+// ========================================================================
+
+$grid-gutter-horizontal:                         $global-gutter !default;
+$grid-gutter-vertical:                           $grid-gutter-horizontal !default;
+$grid-gutter-horizontal-l:                       $global-medium-gutter !default;
+$grid-gutter-vertical-l:                         $grid-gutter-horizontal-l !default;
+
+$grid-small-gutter-horizontal:                   $global-small-gutter !default;
+$grid-small-gutter-vertical:                     $grid-small-gutter-horizontal !default;
+
+$grid-medium-gutter-horizontal:                  $global-gutter !default;
+$grid-medium-gutter-vertical:                    $grid-medium-gutter-horizontal !default;
+
+$grid-large-gutter-horizontal:                   $global-medium-gutter !default;
+$grid-large-gutter-vertical:                     $grid-large-gutter-horizontal !default;
+$grid-large-gutter-horizontal-l:                 $global-large-gutter !default;
+$grid-large-gutter-vertical-l:                   $grid-large-gutter-horizontal-l !default;
+
+$grid-divider-border-width:                      $global-border-width !default;
+$grid-divider-border:                            $global-border !default;
+
+
+/* ========================================================================
+   Component: Grid
+ ========================================================================== */
+
+
+/* ========================================================================
+   Component: Grid
+ ========================================================================== */
+
+/*
+ * 1. Allow cells to wrap into the next line
+ * 2. Reset list
+ */
+
+.id-grid {
+    display: flex;
+    /* 1 */
+    flex-wrap: wrap;
+    /* 2 */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/*
+ * Grid cell
+ * Note: Space is allocated solely based on content dimensions, but shrinks: 0 1 auto
+ * Reset margin for e.g. paragraphs
+ */
+
+.id-grid > * { margin: 0; }
+
+/*
+ * Remove margin from the last-child
+ */
+
+.id-grid > * > :last-child { margin-bottom: 0; }
+
+
+/* Gutter
+ ========================================================================== */
+
+/*
+ * Default
+ */
+
+/* Horizontal */
+.id-grid { margin-left: (-$grid-gutter-horizontal); }
+.id-grid > * { padding-left: $grid-gutter-horizontal; }
+
+/* Vertical */
+.id-grid + .id-grid,
+.id-grid > .id-grid-margin,
+* + .id-grid-margin { margin-top: $grid-gutter-vertical; }
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    /* Horizontal */
+    .id-grid { margin-left: (-$grid-gutter-horizontal-l); }
+    .id-grid > * { padding-left: $grid-gutter-horizontal-l; }
+
+    /* Vertical */
+    .id-grid + .id-grid,
+    .id-grid > .id-grid-margin,
+    * + .id-grid-margin { margin-top: $grid-gutter-vertical-l; }
+
+}
+
+/*
+ * Small
+ */
+
+/* Horizontal */
+.id-grid-small { margin-left: (-$grid-small-gutter-horizontal); }
+.id-grid-small > * { padding-left: $grid-small-gutter-horizontal; }
+
+/* Vertical */
+.id-grid + .id-grid-small,
+.id-grid-small > .id-grid-margin,
+* + .id-grid-margin-small { margin-top: $grid-small-gutter-vertical; }
+
+/*
+ * Medium
+ */
+
+/* Horizontal */
+.id-grid-medium { margin-left: (-$grid-medium-gutter-horizontal); }
+.id-grid-medium > * { padding-left: $grid-medium-gutter-horizontal; }
+
+/* Vertical */
+.id-grid + .id-grid-medium,
+.id-grid-medium > .id-grid-margin,
+* + .id-grid-margin-medium { margin-top: $grid-medium-gutter-vertical; }
+
+/*
+ * Large
+ */
+
+/* Horizontal */
+.id-grid-large { margin-left: (-$grid-large-gutter-horizontal); }
+.id-grid-large > * { padding-left: $grid-large-gutter-horizontal; }
+
+/* Vertical */
+.id-grid + .id-grid-large,
+.id-grid-large > .id-grid-margin,
+* + .id-grid-margin-large { margin-top: $grid-large-gutter-vertical; }
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    /* Horizontal */
+    .id-grid-large { margin-left: (-$grid-large-gutter-horizontal-l); }
+    .id-grid-large > * { padding-left: $grid-large-gutter-horizontal-l; }
+
+    /* Vertical */
+    .id-grid + .id-grid-large,
+    .id-grid-large > .id-grid-margin,
+    * + .id-grid-margin-large { margin-top: $grid-large-gutter-vertical-l; }
+
+}
+
+/*
+ * Collapse
+ */
+
+/* Horizontal */
+.id-grid-collapse { margin-left: 0; }
+.id-grid-collapse > * { padding-left: 0; }
+
+/* Vertical */
+.id-grid + .id-grid-collapse,
+.id-grid-collapse > .id-grid-margin { margin-top: 0; }
+
+
+/* Divider
+ ========================================================================== */
+
+.id-grid-divider > * { position: relative; }
+
+.id-grid-divider > :not(.id-first-column)::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    border-left: $grid-divider-border-width solid $grid-divider-border;
+}
+
+/* Vertical */
+.id-grid-divider.id-grid-stack > .id-grid-margin::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    border-top: $grid-divider-border-width solid $grid-divider-border;
+}
+
+/*
+ * Default
+ */
+
+/* Horizontal */
+.id-grid-divider { margin-left: -($grid-gutter-horizontal * 2); }
+.id-grid-divider > * { padding-left: ($grid-gutter-horizontal * 2); }
+
+.id-grid-divider > :not(.id-first-column)::before { left: $grid-gutter-horizontal; }
+
+/* Vertical */
+.id-grid-divider.id-grid-stack > .id-grid-margin { margin-top: ($grid-gutter-vertical * 2); }
+
+.id-grid-divider.id-grid-stack > .id-grid-margin::before {
+    top: (-$grid-gutter-vertical);
+    left: ($grid-gutter-horizontal * 2);
+}
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    /* Horizontal */
+    .id-grid-divider { margin-left: -($grid-gutter-horizontal-l * 2); }
+    .id-grid-divider > * { padding-left: ($grid-gutter-horizontal-l * 2); }
+
+    .id-grid-divider > :not(.id-first-column)::before { left: $grid-gutter-horizontal-l; }
+
+    /* Vertical */
+    .id-grid-divider.id-grid-stack > .id-grid-margin { margin-top: ($grid-gutter-vertical-l * 2); }
+
+    .id-grid-divider.id-grid-stack > .id-grid-margin::before {
+        top: (-$grid-gutter-vertical-l);
+        left: ($grid-gutter-horizontal-l * 2);
+    }
+
+}
+
+/*
+ * Small
+ */
+
+/* Horizontal */
+.id-grid-divider.id-grid-small { margin-left: -($grid-small-gutter-horizontal * 2); }
+.id-grid-divider.id-grid-small > * { padding-left: ($grid-small-gutter-horizontal * 2); }
+
+.id-grid-divider.id-grid-small > :not(.id-first-column)::before { left: $grid-small-gutter-horizontal; }
+
+/* Vertical */
+.id-grid-divider.id-grid-small.id-grid-stack > .id-grid-margin { margin-top: ($grid-small-gutter-vertical * 2); }
+
+.id-grid-divider.id-grid-small.id-grid-stack > .id-grid-margin::before {
+    top: (-$grid-small-gutter-vertical);
+    left: ($grid-small-gutter-horizontal * 2);
+}
+
+/*
+ * Medium
+ */
+
+/* Horizontal */
+.id-grid-divider.id-grid-medium { margin-left: -($grid-medium-gutter-horizontal * 2); }
+.id-grid-divider.id-grid-medium > * { padding-left: ($grid-medium-gutter-horizontal * 2); }
+
+.id-grid-divider.id-grid-medium > :not(.id-first-column)::before { left: $grid-medium-gutter-horizontal; }
+
+/* Vertical */
+.id-grid-divider.id-grid-medium.id-grid-stack > .id-grid-margin { margin-top: ($grid-medium-gutter-vertical * 2); }
+
+.id-grid-divider.id-grid-medium.id-grid-stack > .id-grid-margin::before {
+    top: (-$grid-medium-gutter-vertical);
+    left: ($grid-medium-gutter-horizontal * 2);
+}
+
+/*
+ * Large
+ */
+
+/* Horizontal */
+.id-grid-divider.id-grid-large { margin-left: -($grid-large-gutter-horizontal * 2); }
+.id-grid-divider.id-grid-large > * { padding-left: ($grid-large-gutter-horizontal * 2); }
+
+.id-grid-divider.id-grid-large > :not(.id-first-column)::before { left: $grid-large-gutter-horizontal; }
+
+/* Vertical */
+.id-grid-divider.id-grid-large.id-grid-stack > .id-grid-margin { margin-top: ($grid-large-gutter-vertical * 2); }
+
+.id-grid-divider.id-grid-large.id-grid-stack > .id-grid-margin::before {
+    top: (-$grid-large-gutter-vertical);
+    left: ($grid-large-gutter-horizontal * 2);
+}
+
+/* Desktop and bigger */
+@media (min-width: $breakpoint-large) {
+
+    /* Horizontal */
+    .id-grid-divider.id-grid-large { margin-left: -($grid-large-gutter-horizontal-l * 2); }
+    .id-grid-divider.id-grid-large > * { padding-left: ($grid-large-gutter-horizontal-l * 2); }
+
+    .id-grid-divider.id-grid-large > :not(.id-first-column)::before { left: $grid-large-gutter-horizontal-l; }
+
+    /* Vertical */
+    .id-grid-divider.id-grid-large.id-grid-stack > .id-grid-margin { margin-top: ($grid-large-gutter-vertical-l * 2); }
+
+    .id-grid-divider.id-grid-large.id-grid-stack > .id-grid-margin::before {
+        top: (-$grid-large-gutter-vertical-l);
+        left: ($grid-large-gutter-horizontal-l * 2);
+    }
+
+}
+
+
+/* Match child of a grid cell
+ ========================================================================== */
+
+/*
+ * Behave like a block element
+ * 1. Wrap into the next line
+ * 2. Take the full width, at least 100%. Only if no class from the Width component is set.
+ * 3. Expand width even if larger than 100%, e.g. because of negative margin (Needed for nested grids)
+ */
+
+.id-grid-match > *,
+.id-grid-item-match {
+    display: flex;
+    /* 1 */
+    flex-wrap: wrap;
+}
+
+.id-grid-match > * > :not([class*='id-width']),
+.id-grid-item-match > :not([class*='id-width']) {
+    /* 2 */
+    box-sizing: border-box;
+    width: 100%;
+    /* 3 */
+    flex: auto;
+}

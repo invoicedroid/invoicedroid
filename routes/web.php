@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Web Routes used only for the admin app - nothing more
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
@@ -11,8 +11,6 @@
 |
 */
 
-Route::group(['middleware' => ['language', 'installed']], function() {
-    Route::get('{path}', function () {
-        return view('index');
-    })->where('path', '(.*)');
+Route::group(['middleware' => ['language', 'auth']], function() {
+    Route::get('{path}', 'FrontendController@show')->where('path', '(.*)')->name('admin.dashboard');
 });

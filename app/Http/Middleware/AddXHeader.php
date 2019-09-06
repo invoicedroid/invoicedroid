@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class RedirectIfInstalled
+class AddXHeader
 {
     /**
      * Handle an incoming request.
@@ -15,10 +15,11 @@ class RedirectIfInstalled
      */
     public function handle($request, Closure $next)
     {
-        if (config('app.installed') == false) {
-            return $next($request);
+        $response = $next($request);
+        // Check if we should add header
+        if (method_exists($response, 'header')) {
+            $response->header('X-InvoiceDroid', 'Open-Source Accounting Software');
         }
-
-        return redirect()->route('home');
+        return $response;
     }
 }

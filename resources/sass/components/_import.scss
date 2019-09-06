@@ -3,6 +3,11 @@
 @import "mixins.scss";
 @import "base.scss";
 
+// Layout
+@import "container.scss";
+@import "grid.scss";
+@import "section.scss";
+
 // Navs
 @import "dotnav.scss";
 

@@ -1,0 +1,182 @@
+// Name:            Container
+// Description:     Component to align and center your site and grid content
+//
+// Component:       `id-container`
+//
+// Modifier:        `id-container-small`
+//                  `id-container-large`
+//                  `id-container-expand`
+//                  `id-container-expand-left`
+//                  `id-container-expand-right`
+//                  `id-container-item-padding-remove-left`
+//                  `id-container-item-padding-remove-right`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+$container-max-width:                    1200px !default;
+$container-xsmall-max-width:             750px !default;
+$container-small-max-width:              900px !default;
+$container-large-max-width:              1600px !default;
+
+$container-padding-horizontal:           15px !default;
+$container-padding-horizontal-s:         $global-gutter !default;
+$container-padding-horizontal-m:         $global-medium-gutter !default;
+
+
+/* ========================================================================
+   Component: Container
+ ========================================================================== */
+
+/*
+ * 1. Box sizing has to be `content-box` so the max-width is always the same and
+ *    unaffected by the padding on different breakpoints. It's important for the size modifiers.
+ */
+
+.id-container {
+    /* 1 */
+    box-sizing: content-box;
+    max-width: $container-max-width;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: $container-padding-horizontal;
+    padding-right: $container-padding-horizontal;
+}
+
+/* Phone landscape and bigger */
+@media (min-width: $breakpoint-small) {
+
+    .id-container {
+        padding-left: $container-padding-horizontal-s;
+        padding-right: $container-padding-horizontal-s;
+    }
+
+}
+
+/* Tablet landscape and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    .id-container {
+        padding-left: $container-padding-horizontal-m;
+        padding-right: $container-padding-horizontal-m;
+    }
+
+}
+
+/*
+ * Micro clearfix
+ */
+
+.id-container::before,
+.id-container::after {
+    content: "";
+    display: table;
+}
+
+.id-container::after { clear: both; }
+
+/*
+ * Remove margin from the last-child
+ */
+
+.id-container > :last-child { margin-bottom: 0; }
+
+/*
+ * Remove padding from nested containers
+ */
+
+.id-container .id-container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+/* Size modifier
+ ========================================================================== */
+
+.id-container-xsmall { max-width: $container-xsmall-max-width; }
+
+.id-container-small { max-width: $container-small-max-width; }
+
+.id-container-large { max-width: $container-large-max-width; }
+
+.id-container-expand { max-width: none; }
+
+
+/* Expand modifier
+ ========================================================================== */
+
+/*
+ * Expand one side only
+ */
+
+.id-container-expand-left { margin-left: 0; }
+.id-container-expand-right { margin-right: 0; }
+
+/* Phone landscape and bigger */
+@media (min-width: $breakpoint-small) {
+
+    .id-container-expand-left.id-container-xsmall,
+    .id-container-expand-right.id-container-xsmall { max-width: unquote('calc(50% + (#{$container-xsmall-max-width} / 2) - #{$container-padding-horizontal-s})'); }
+
+    .id-container-expand-left.id-container-small,
+    .id-container-expand-right.id-container-small { max-width: unquote('calc(50% + (#{$container-small-max-width} / 2) - #{$container-padding-horizontal-s})'); }
+
+}
+
+/* Tablet landscape and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    .id-container-expand-left,
+    .id-container-expand-right { max-width: unquote('calc(50% + (#{$container-max-width} / 2) - #{$container-padding-horizontal-m})'); }
+
+    .id-container-expand-left.id-container-xsmall,
+    .id-container-expand-right.id-container-xsmall { max-width: unquote('calc(50% + (#{$container-xsmall-max-width} / 2) - #{$container-padding-horizontal-m})'); }
+
+    .id-container-expand-left.id-container-small,
+    .id-container-expand-right.id-container-small { max-width: unquote('calc(50% + (#{$container-small-max-width} / 2) - #{$container-padding-horizontal-m})'); }
+
+    .id-container-expand-left.id-container-large,
+    .id-container-expand-right.id-container-large { max-width: unquote('calc(50% + (#{$container-large-max-width} / 2) - #{$container-padding-horizontal-m})'); }
+
+}
+
+
+/* Item
+ ========================================================================== */
+
+/*
+ * Utility classes to reset container padding on the left or right side
+ * Note: It has to be negative margin on the item, because it's specific to the item.
+ */
+
+.id-container-item-padding-remove-left,
+.id-container-item-padding-remove-right { width: unquote('calc(100% + #{$container-padding-horizontal})') }
+
+.id-container-item-padding-remove-left { margin-left: (-$container-padding-horizontal); }
+.id-container-item-padding-remove-right { margin-right: (-$container-padding-horizontal); }
+
+/* Phone landscape and bigger */
+@media (min-width: $breakpoint-small) {
+
+    .id-container-item-padding-remove-left,
+    .id-container-item-padding-remove-right { width: unquote('calc(100% + #{$container-padding-horizontal-s})') }
+
+    .id-container-item-padding-remove-left { margin-left: (-$container-padding-horizontal-s); }
+    .id-container-item-padding-remove-right { margin-right: (-$container-padding-horizontal-s); }
+
+}
+
+/* Tablet landscape and bigger */
+@media (min-width: $breakpoint-medium) {
+
+    .id-container-item-padding-remove-left,
+    .id-container-item-padding-remove-right { width: unquote('calc(100% + #{$container-padding-horizontal-m})') }
+
+    .id-container-item-padding-remove-left { margin-left: (-$container-padding-horizontal-m); }
+    .id-container-item-padding-remove-right { margin-right: (-$container-padding-horizontal-m); }
+
+}

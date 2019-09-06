@@ -21,7 +21,7 @@ class Languages extends Controller
      */
     public function store(Request $request)
     {
-        Session::put('locale', $request->lang);
+        Session::put('locale', $request->language);
         return redirect()->route('install.database');
     }
 }

@@ -1,0 +1,10 @@
+<?php
+
+return [
+    'domain'                => 'Domain',
+    'manage'                => 'Manage Companies',
+    'all'                   => 'All Companies',
+    'error' => [
+        'delete_active'     => 'Error: Can not delete active company, please, change it first!',
+    ],
+];

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class RedirectIfNotInstalled
 {
@@ -18,6 +19,11 @@ class RedirectIfNotInstalled
     {
         // Check if .env file exists
         if ( File::exists(base_path('.env')) ) {
+            return $next($request);
+        }
+
+        // Already in the wizard
+        if (Str::startsWith($request->getPathInfo(), '/install')) {
             return $next($request);
         }
 

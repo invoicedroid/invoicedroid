@@ -5,9 +5,9 @@ return [
     'refresh'               => 'Refresh',
     'steps' => [
         'requirements'      => 'Please, ask your hosting provider to fix the errors!',
-        'language'          => 'Step 1/3 : Language Selection',
-        'database'          => 'Step 2/3 : Database Setup',
-        'settings'          => 'Step 3/3 : Company and Admin Details',
+        'language'          => 'Language Selection',
+        'database'          => 'Database Setup',
+        'settings'          => 'Company Details',
     ],
     'language' => [
         'select'            => 'Select Language',
@@ -20,6 +20,7 @@ return [
     ],
     'database' => [
         'hostname'          => 'Hostname',
+        'port'              => 'Port',
         'username'          => 'Username',
         'password'          => 'Password',
         'name'              => 'Database',
@@ -27,10 +28,12 @@ return [
     'settings' => [
         'company_name'      => 'Company Name',
         'company_email'     => 'Company Email',
+        'admin_name'        => 'Admin Name',
         'admin_email'       => 'Admin Email',
         'admin_password'    => 'Admin Password',
     ],
     'error' => [
         'connection'        => 'Error: Could not connect to the database! Please, make sure the details are correct.',
     ],
+
 ];

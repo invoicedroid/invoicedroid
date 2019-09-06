@@ -6,7 +6,7 @@
 
 <script>
     export default {
-        layout: 'basic',
+        layout: 'default',
 
         metaInfo () {
             return { title: this.$t('auth.failed') }

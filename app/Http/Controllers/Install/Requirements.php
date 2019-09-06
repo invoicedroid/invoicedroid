@@ -24,8 +24,8 @@ class Requirements extends Controller
 
             return redirect()->route('install.language');
         } else {
-            dd( $requirements );
-            return view('install.requirements.show', $requirements);
+
+            return view('install.requirements.show')->withRequirements($requirements);
         }
     }
 }

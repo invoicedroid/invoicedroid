@@ -4,12 +4,13 @@ namespace App\Models\Auth;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Jenssegers\Date\Date;
+use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable, SoftDeletes;
+    use Notifiable, SoftDeletes, LaratrustUserTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'locale', 'enabled'
     ];
 
     /**
@@ -29,6 +30,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'last_logged_in_at',
+        'deleted_at'
+    ];
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -37,4 +45,38 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function companies()
+    {
+        return $this->morphToMany('App\Models\Company\Company', 'user', 'user_companies', 'user_id', 'company_id');
+    }
+
+
+    /**
+     * @param $value
+     * @return array|\Illuminate\Contracts\Translation\Translator|string|null
+     */
+    public function getLastLoggedInAtAttribute($value)
+    {
+        if (!empty($value)) {
+            return Date::parse($value)->diffForHumans();
+        } else {
+            return trans('auth.never');
+        }
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeEnabled($query)
+    {
+        return $query->where('enabled', 1);
+    }
+
+
 }
